@@ -10,7 +10,7 @@ vcpuTotal=0
 
 for vm in $(virsh list | tail -n +3 | head -n -1 | awk '{ print $2}'); do
   for disk in $(virsh dumpxml $vm | grep "/dev/mapper/"  | awk -F"'" '{print $2}'); do
-    #echo $disk
+    echo $disk
     size=$(fdisk -l $disk | grep "Disk /" | awk '{ print $5 }')
     let "sizeTotal+=size"
 
